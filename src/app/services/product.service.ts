@@ -9,11 +9,17 @@ import { Product } from '../models/product';
 })
 export class ProductService {
 
-  apiUrl = "https://localhost:44340/api/products/getall"
+  apiUrl = "https://localhost:44340/api/"
 
   constructor(private httpClinet: HttpClient) { }
 
   getProducts():Observable<ListResponseModel<Product>> {
-   return this.httpClinet.get<ListResponseModel<Product>>(this.apiUrl)
+    let newPath = this.apiUrl + "products/getall"
+   return this.httpClinet.get<ListResponseModel<Product>>(newPath)
   }
+
+  getProductsByCategory(categoryId:number):Observable<ListResponseModel<Product>> {
+    let newPath = this.apiUrl + "products/getbycategory?categoryId="+categoryId
+    return this.httpClinet.get<ListResponseModel<Product>>(newPath)
+   }
 }
